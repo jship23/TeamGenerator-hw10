@@ -11,44 +11,122 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const { listenerCount } = require("process");
 
-const employees = [];
+let employeeArr = [];
 
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-questionPrompts();
 
-
-function questionPrompts() {
+function questionsManager() {
 
     inquirer
         .prompt([
             {
-                type: "list",
-                name: "role",
-                message: "what type of employee is this?",
-                choices: ["manager", "engineer", "intern"],
-
-            },
-            {
                 type: "input",
                 name: "name",
-                message: "Enter employee first and last name",
+                message: "Enter manager's first and last name",
             },
             {
                 type: "input",
                 name: "email",
-                message: "What is the employee's email address?",
+                message: "What is the manager's email address?",
             },
             {
                 type: "input",
                 name: "id",
-                message: "What is the employee's id number?",
+                message: "What is the manager's id number?",
             },
-        ])
-}
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is the manager's office number?",
+            },
+
+        ]).then(answer =>{
+            const manager = new Manager(answer.name, answer.email, answer.id, answer.officeNumber)
+            employeeArr.push(manager)
+        });
+
+        addEmployee();
+
+function questionsEngineer() {
+
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Enter engineer's first and last name",
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is the engineer's email address?",
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is the engineer's id number?",
+            },
+            {
+                type: "input",
+                name: "githubID",
+                message: "What is the engineer's github ID?",
+            },
+
+        ]).then(answer =>{
+            const engineer = new Engineer(answer.name, answer.email, answer.id, answer.githubID)
+            employeeArr.push(engineer)
+        });
+
+        addEmployee();
+
+function questionsIntern() {
+
+        inquirer
+            .prompt([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "Enter intern's first and last name",
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "What is the intern's email address?",
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "What is the intern's id number?",
+                },
+                {
+                    type: "input",
+                    name: "school",
+                    message: "What school does the intern attend?",
+                },
+    
+            ]).then(answer =>{
+                const intern = new Intern(answer.name, answer.email, answer.id, answer.school)
+                employeeArr.push(intern)
+            });
+
+            addEmployee();
+
+    function addEmployee(){
+
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "role",
+                message: "Which type of employee would you like to add?",
+                choices: ["Engineer","Intern", "None"]
+            }
+        ]);
+    };
+};
 
 
 // After the user has input all employees desired, call the `render` function (required
