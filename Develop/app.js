@@ -9,7 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { listenerCount } = require("process");
+
 
 let employeeArr = [];
 
@@ -18,7 +18,7 @@ let employeeArr = [];
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-
+// function to create manager
 function questionsManager() {
 
     inquirer
@@ -44,13 +44,15 @@ function questionsManager() {
                 message: "What is the manager's office number?",
             },
 
-        ]).then(answer =>{
+        ]).then((answer) =>{
             const manager = new Manager(answer.name, answer.email, answer.id, answer.officeNumber)
             employeeArr.push(manager)
         });
+    }
 
         addEmployee();
 
+//function to create engingerr
 function questionsEngineer() {
 
     inquirer
@@ -76,14 +78,16 @@ function questionsEngineer() {
                 message: "What is the engineer's github ID?",
             },
 
-        ]).then(answer =>{
+        ]).then((answer) =>{
             const engineer = new Engineer(answer.name, answer.email, answer.id, answer.githubID)
             employeeArr.push(engineer)
         });
+    }
 
         addEmployee();
 
-function questionsIntern() {
+// function to create Intern
+function questionsIntern(){
 
         inquirer
             .prompt([
@@ -108,10 +112,11 @@ function questionsIntern() {
                     message: "What school does the intern attend?",
                 },
     
-            ]).then(answer =>{
+            ]).then((answer) =>{
                 const intern = new Intern(answer.name, answer.email, answer.id, answer.school)
                 employeeArr.push(intern)
             });
+        }
 
             addEmployee();
 
@@ -124,10 +129,28 @@ function questionsIntern() {
                 message: "Which type of employee would you like to add?",
                 choices: ["Engineer","Intern", "None"]
             }
-        ]);
-    };
-};
+        ]).then(answer =>{
+            switch(answer.role){
+                case "Engineer":
+                questionsEngineer();
+                break;
 
+                case "Intern":
+                questionsIntern();
+                break;
+
+                default:
+                    createTeam();
+                                    
+            }
+        })
+    };
+    function createTeam(){
+        fs.writeFile(outputPath, render(answer), utf8)
+    }
+
+
+questionsManager();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
