@@ -42,14 +42,13 @@ function questionsManager() {
                 type: "input",
                 name: "officeNumber",
                 message: "What is the manager's office number?",
-            },
+            }
 
         ]).then((answer) =>{
             const manager = new Manager(answer.name, answer.email, answer.id, answer.officeNumber)
             employeeArr.push(manager)
         });
     }
-
         addEmployee();
 
 //function to create engingerr
@@ -74,15 +73,15 @@ function questionsEngineer() {
             },
             {
                 type: "input",
-                name: "githubID",
+                name: "github",
                 message: "What is the engineer's github ID?",
-            },
+            }
 
         ]).then((answer) =>{
-            const engineer = new Engineer(answer.name, answer.email, answer.id, answer.githubID)
+            const engineer = new Engineer(answer.name, answer.email, answer.id, answer.github)
             employeeArr.push(engineer)
         });
-    }
+    };
 
         addEmployee();
 
@@ -110,13 +109,13 @@ function questionsIntern(){
                     type: "input",
                     name: "school",
                     message: "What school does the intern attend?",
-                },
+                }
     
             ]).then((answer) =>{
                 const intern = new Intern(answer.name, answer.email, answer.id, answer.school)
                 employeeArr.push(intern)
             });
-        }
+        };
 
             addEmployee();
 
@@ -148,8 +147,6 @@ function questionsIntern(){
     function createTeam(){
         fs.writeFile(outputPath, render(answer), utf8)
     }
-
-
 questionsManager();
 
 // After the user has input all employees desired, call the `render` function (required
