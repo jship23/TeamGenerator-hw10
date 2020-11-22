@@ -19,6 +19,7 @@ let employeeArr = [];
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // function to create manager
+questionsManager();
 function questionsManager() {
 
     inquirer
@@ -48,8 +49,8 @@ function questionsManager() {
             const manager = new Manager(answer.name, answer.email, answer.id, answer.officeNumber)
             employeeArr.push(manager)
         });
-    }
         addEmployee();
+    }
 
 //function to create engingerr
 function questionsEngineer() {
@@ -81,9 +82,9 @@ function questionsEngineer() {
             const engineer = new Engineer(answer.name, answer.email, answer.id, answer.github)
             employeeArr.push(engineer)
         });
+        addEmployee();
     };
 
-        addEmployee();
 
 // function to create Intern
 function questionsIntern(){
@@ -115,9 +116,9 @@ function questionsIntern(){
                 const intern = new Intern(answer.name, answer.email, answer.id, answer.school)
                 employeeArr.push(intern)
             });
+            addEmployee();
         };
 
-            addEmployee();
 
     function addEmployee(){
 
@@ -147,7 +148,7 @@ function questionsIntern(){
     function createTeam(){
         fs.writeFile(outputPath, render(answer), utf8)
     }
-questionsManager();
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
