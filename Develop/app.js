@@ -146,7 +146,10 @@ function questionsIntern(){
         })
     };
     function createTeam(){
-        fs.writeFile(outputPath, render(answer), utf8)
+        if (!fs.existsSync(OUTPUT_DIR)) {
+            fs.mkdirSync(OUTPUT_DIR);
+        }
+        fs.writeFile(outputPath, render(answer), "utf-8")
     }
 
 
