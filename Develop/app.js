@@ -48,8 +48,8 @@ function questionsManager() {
         ]).then((answer) =>{
             const manager = new Manager(answer.name, answer.email, answer.id, answer.officeNumber)
             employeeArr.push(manager)
+            addEmployee();
         });
-        addEmployee();
     }
 
 //function to create engingerr
@@ -81,8 +81,8 @@ function questionsEngineer() {
         ]).then((answer) =>{
             const engineer = new Engineer(answer.name, answer.email, answer.id, answer.github)
             employeeArr.push(engineer)
+            addEmployee();
         });
-        addEmployee();
     };
 
 
@@ -115,8 +115,8 @@ function questionsIntern(){
             ]).then((answer) =>{
                 const intern = new Intern(answer.name, answer.email, answer.id, answer.school)
                 employeeArr.push(intern)
+                addEmployee();
             });
-            addEmployee();
         };
 
 
